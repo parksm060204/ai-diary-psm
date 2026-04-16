@@ -1,6 +1,5 @@
 import { NextRequest } from "next/server";
 
-const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 const GEMINI_API_URL =
   "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite-preview:generateContent";
 
@@ -21,7 +20,9 @@ export interface AnalysisResult {
 
 export async function POST(request: NextRequest) {
   try {
+    const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
     const { diary } = await request.json();
+
 
     if (!diary || diary.trim().length === 0) {
       return Response.json(

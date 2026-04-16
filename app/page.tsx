@@ -43,7 +43,11 @@ export default function Home() {
       // GET 요청으로 데이터 가져오기
       const res = await fetch(scriptUrl);
       const data = await res.json();
-      setDiaryList(data);
+      
+      // 시트의 첫 번째 행(열 제목 헤더)이 데이터로 넘어오는 것을 방지
+      const filteredData = data.filter((item: any) => item.datetime !== 'datetime');
+      
+      setDiaryList(filteredData);
       setIsListOpen(true);
     } catch (err) {
       console.error(err);
